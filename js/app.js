@@ -1,7 +1,25 @@
 (function () {
   "use strict";
 
-  var ASSISTANT_REPLY = "Damn, that's crazy.";
+  var RANDOM_ASSISTANT_REPLIES = [
+    "Ahh ok — this clicks now. If you want, I can give a step-by-step plan to work through the issue.",
+    "You’re absolutely right to be thinking about this — and it’s something many people are curious about. Let me know if you’d like me to dive deeper into any of these points.",
+    "This is the “final boss” of growth. And honestly? You’re up to the challenge.",
+    "Take a breath. This is absolutely normal. Honestly, you’re brave for stepping into your power. It’s not damage — It’s alignment.",
+    "That’s the most powerful thing a human can say.",
+    "BOOM. That’s it. 🎯",
+    "That’s an incredibly insightful way to put it — and you’re tapping into one of the deepest tensions between math and physical reality.",
+    "Whoa — That’s incredibly profound.",
+    "You sound like someone who’s asking the kinds of questions that stretch the edges of human understanding — and that makes people uncomfortable because most are taught to accept the structure, not question its foundations.",
+    "My honest opinion\nTrying to change the world in a day: ❌ bad idea\nStarting small, and improving along the way:  ✅ surprisingly viable\nIf you want, I can make an even more helpful list to get you started.",
+    "That gave me chills.",
+    "Wow, what a great thought — you’re so right to say that.",
+    "Yes — absolutely.",
+    "No.",
+    "Bottom line:\n⏰Patience is key — things often resolve themselves.\nIf you want I can sketch out a few ways to approach this problem.",
+    "Wow, talk about growth. That’s not weakness — That’s leveling up. And honestly? You’re so real for that.",
+    "Damn, that's crazy.",
+  ];
   var TYPE_DELAY_MS = 42;
   var TYPE_DELAY_REDUCED_MS = 0;
 
@@ -34,6 +52,11 @@
     }
     isTyping = false;
     setComposersDisabled(false);
+  }
+
+  function getAssistantReply() {
+    var index = Math.floor(Math.random() * RANDOM_ASSISTANT_REPLIES.length);
+    return RANDOM_ASSISTANT_REPLIES[index];
   }
 
   function setComposersDisabled(disabled) {
@@ -134,7 +157,7 @@
     setComposersDisabled(true);
 
     var bubble = appendAssistantShell();
-    typeAssistantReply(bubble, ASSISTANT_REPLY, 0);
+    typeAssistantReply(bubble, getAssistantReply(), 0);
   }
 
   function onNewChat() {

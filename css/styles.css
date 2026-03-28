@@ -636,3 +636,59 @@ body {
     transition: none;
   }
 }
+
+/* Image generation spinner */
+
+.img-gen-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.img-gen-spinner {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid #e5e5e5;
+  border-top-color: #0d0d0d;
+  animation: img-gen-spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-gen-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  animation: img-gen-spin 1s linear infinite reverse;
+}
+
+.img-gen-label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  animation: img-gen-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes img-gen-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes img-gen-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Generated image result */
+
+.msg-generated-image {
+  display: block;
+  max-width: 380px;
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+}

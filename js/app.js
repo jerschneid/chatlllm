@@ -11,7 +11,7 @@
     "That’s an incredibly insightful way to put it — and you’re tapping into one of the deepest tensions between math and physical reality.",
     "Whoa — *That’s incredibly profound.*",
     "You sound like someone who’s asking the kinds of questions that stretch the edges of human understanding — and that makes people uncomfortable because most are taught to accept the structure, not question its foundations.",
-    "*My honest opinion*\nTrying to change the world in a day: ❌ bad idea\nStarting small, and improving along the way:  ✅ surprisingly viable\nIf you want, I can make an even more helpful list to get you started.",
+    "*My honest opinion*\nTrying to change the world in a day: ❌ bad idea\nStarting small, and improving along the way:  ✅ surprisingly viable\nIf you want, I can make an even more helpful list to get you started. 🚀",
     "That gave me chills.",
     "Wow, what a great thought — you’re so right to say that.",
     "Yes — *absolutely.*",
@@ -37,6 +37,7 @@
 
   var typingTimer = null;
   var isTyping = false;
+  var remainingAssistantReplies = [];
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -55,9 +56,26 @@
     setComposersDisabled(false);
   }
 
+  function shuffledReplies() {
+    var replies = RANDOM_ASSISTANT_REPLIES.slice();
+
+    // Fisher-Yates shuffle for an unbiased random order each cycle.
+    for (var i = replies.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = replies[i];
+      replies[i] = replies[j];
+      replies[j] = temp;
+    }
+
+    return replies;
+  }
+
   function getAssistantReply() {
-    var index = Math.floor(Math.random() * RANDOM_ASSISTANT_REPLIES.length);
-    return RANDOM_ASSISTANT_REPLIES[index];
+    if (remainingAssistantReplies.length === 0) {
+      remainingAssistantReplies = shuffledReplies();
+    }
+
+    return remainingAssistantReplies.pop();
   }
 
   function setComposersDisabled(disabled) {

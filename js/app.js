@@ -38,6 +38,39 @@
     "Best Dating Apps",
   ];
 
+  var SIDEBAR_SHORTCUTS = [
+    {
+      label: "Search chats",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4" stroke-linecap="round"/></svg>',
+    },
+    {
+      label: "Images",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="4" y="5" width="11" height="9" rx="1"/><rect x="9" y="10" width="11" height="9" rx="1"/></svg>',
+    },
+    {
+      label: "Apps",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="8" r="2.5"/><circle cx="8" cy="16" r="2.5"/><circle cx="16" cy="16" r="2.5"/></svg>',
+    },
+    {
+      label: "Deep research",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 18h18" stroke-linecap="round"/><path d="M6 18l4-10 3 1.5L18 6l3 3-5 6.5L11 14l-2 4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    },
+    {
+      label: "Codex",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>',
+    },
+    {
+      label: "Projects",
+      icon:
+        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 8h5l2 2h9v10H4V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 14v4M15 16h4" stroke-linecap="round"/></svg>',
+    },
+  ];
+
   var sidebar = document.getElementById("sidebar");
   var btnToggle = document.getElementById("btn-sidebar-toggle");
   var btnNewChat = document.getElementById("btn-new-chat");
@@ -50,6 +83,7 @@
   var inputDock = document.getElementById("input-dock");
   var waterUsageEl = document.getElementById("water-usage");
   var sidebarChatsList = document.getElementById("sidebar-chats-list");
+  var sidebarShortcutsList = document.getElementById("sidebar-shortcuts-list");
 
   var typingTimer = null;
   var isTyping = false;
@@ -315,6 +349,12 @@
     }
   }
 
+  function fillAndSendPreset(text) {
+    inputEmpty.value = text;
+    inputDock.value = text;
+    sendUserMessage(text);
+  }
+
   function submitMessage(ev) {
     ev.preventDefault();
     var input = activeInput();
@@ -351,14 +391,41 @@
       });
 
       pick.addEventListener("click", function () {
-        inputEmpty.value = title;
-        inputDock.value = title;
-        sendUserMessage(title);
+        fillAndSendPreset(title);
       });
 
       row.appendChild(pick);
       row.appendChild(more);
       sidebarChatsList.appendChild(row);
+    });
+  }
+
+  function renderSidebarShortcuts() {
+    if (!sidebarShortcutsList) return;
+
+    SIDEBAR_SHORTCUTS.forEach(function (item) {
+      var li = document.createElement("li");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "sidebar__shortcut";
+
+      var iconWrap = document.createElement("span");
+      iconWrap.className = "sidebar__shortcut-icon";
+      iconWrap.innerHTML = item.icon;
+
+      var label = document.createElement("span");
+      label.className = "sidebar__shortcut-label";
+      label.textContent = item.label;
+
+      btn.appendChild(iconWrap);
+      btn.appendChild(label);
+
+      btn.addEventListener("click", function () {
+        fillAndSendPreset(item.label);
+      });
+
+      li.appendChild(btn);
+      sidebarShortcutsList.appendChild(li);
     });
   }
 
@@ -394,6 +461,7 @@
   btnNewChat.addEventListener("click", onNewChat);
   btnToggle.addEventListener("click", onSidebarToggle);
 
+  renderSidebarShortcuts();
   renderSidebarChats();
   inputEmpty.focus();
 })();

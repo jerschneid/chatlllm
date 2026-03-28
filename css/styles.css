@@ -153,7 +153,8 @@ body {
   gap: 10px;
   width: 100%;
   padding: 10px 12px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 0px;
   border: 1px solid var(--sidebar-border);
   border-radius: 10px;
   background: var(--main-bg);
@@ -180,6 +181,82 @@ body {
 }
 
 .sidebar.collapsed .btn-new-chat__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.sidebar__shortcuts {
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.sidebar__shortcuts-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__shortcut {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 9px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.sidebar__shortcut:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.sidebar__shortcut:focus-visible {
+  outline: 2px solid #0d0d0d;
+  outline-offset: 2px;
+}
+
+.sidebar__shortcut-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+
+.sidebar__shortcut-icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.sidebar__shortcut-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar.collapsed .sidebar__shortcut {
+  justify-content: center;
+  padding: 9px 10px;
+}
+
+.sidebar.collapsed .sidebar__shortcut-label {
   position: absolute;
   width: 1px;
   height: 1px;

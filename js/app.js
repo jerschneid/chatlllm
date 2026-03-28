@@ -72,6 +72,7 @@
   var emptyState = document.getElementById("empty-state");
   var chatPanel = document.getElementById("chat-panel");
   var messagesEl = document.getElementById("messages");
+  var messagesScrollEl = document.getElementById("messages-scroll");
   var composerEmpty = document.getElementById("composer-empty");
   var composerDock = document.getElementById("composer-dock");
   var inputEmpty = document.getElementById("input-empty");
@@ -180,7 +181,8 @@
   }
 
   function scrollMessagesToEnd() {
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+    var scroller = messagesScrollEl || messagesEl;
+    scroller.scrollTop = scroller.scrollHeight;
   }
 
   function appendUserMessage(text) {

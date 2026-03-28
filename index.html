@@ -71,12 +71,34 @@
 
     <main class="main">
       <header class="main-header">
-        <button type="button" class="main-header__title-btn" disabled aria-disabled="true">
-          <span class="main-header__title">ChatLLLM</span>
-          <svg class="icon icon--sm icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        <div class="main-header__start">
+          <button
+            type="button"
+            class="icon-btn main-header__menu-btn"
+            id="btn-mobile-menu"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="sidebar"
+          >
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="4" y1="6" x2="20" y2="6" stroke-linecap="round"/>
+              <line x1="4" y1="12" x2="20" y2="12" stroke-linecap="round"/>
+              <line x1="4" y1="18" x2="20" y2="18" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="main-header__logo-mark" aria-hidden="true">
+            <svg class="main-header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M12 3c-2.5 3-6 4.5-6 9a6 6 0 1 0 12 0c0-4.5-3.5-6-6-9z" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 12v4" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <button type="button" class="main-header__title-btn" disabled aria-disabled="true">
+            <span class="main-header__title">ChatLLLM</span>
+            <svg class="icon icon--sm icon--chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
         <div class="main-header__actions">
           <button type="button" class="icon-btn icon-btn--ghost" aria-label="Profile" disabled>
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">

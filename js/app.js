@@ -25,6 +25,17 @@
   var TYPE_DELAY_REDUCED_MS = 0;
   var GALLONS_PER_PRINTED_CHAR = 81;
 
+  var CHAT_HISTORY_TITLES = [
+    "Better Dating Apps",
+    "Text Ex an Apology",
+    "First Aid for Groin Injury",
+    "Tell Fiancée She's Fat",
+    "How to Propose to GF",
+    "First Date Ideas",
+    "How to Ask Girl Out",
+    "Best Dating Apps",
+  ];
+
   var sidebar = document.getElementById("sidebar");
   var btnToggle = document.getElementById("btn-sidebar-toggle");
   var btnNewChat = document.getElementById("btn-new-chat");
@@ -36,6 +47,7 @@
   var inputEmpty = document.getElementById("input-empty");
   var inputDock = document.getElementById("input-dock");
   var waterUsageEl = document.getElementById("water-usage");
+  var sidebarChatsList = document.getElementById("sidebar-chats-list");
 
   var typingTimer = null;
   var isTyping = false;
@@ -235,21 +247,20 @@
     return chatPanel.classList.contains("hidden") ? inputEmpty : inputDock;
   }
 
-  function submitMessage(ev) {
-    ev.preventDefault();
+  function sendUserMessage(text) {
     if (isTyping) return;
 
-    var input = activeInput();
-    var text = input.value.replace(/\r/g, "").trim();
-    if (!text) return;
+    var trimmed = text.replace(/\r/g, "").trim();
+    if (!trimmed) return;
 
     clearTyping();
     showChatLayout();
 
-    appendUserMessage(text);
-    input.value = "";
-    if (input === inputEmpty) inputDock.value = "";
-    else inputEmpty.value = "";
+    appendUserMessage(trimmed);
+    inputEmpty.value = "";
+    inputDock.value = "";
+    inputEmpty.style.height = "";
+    inputDock.style.height = "";
 
     isTyping = true;
     setComposersDisabled(true);
@@ -257,6 +268,53 @@
     var bubble = appendAssistantShell();
     var replyParts = parseAssistantReply(getAssistantReply());
     typeAssistantReply(bubble, replyParts, 0, assistantReplyLength(replyParts));
+  }
+
+  function submitMessage(ev) {
+    ev.preventDefault();
+    var input = activeInput();
+    sendUserMessage(input.value);
+  }
+
+  function renderSidebarChats() {
+    if (!sidebarChatsList) return;
+
+    var dotsSvg =
+      '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+      '<circle cx="5" cy="12" r="2"/>' +
+      '<circle cx="12" cy="12" r="2"/>' +
+      '<circle cx="19" cy="12" r="2"/>' +
+      "</svg>";
+
+    CHAT_HISTORY_TITLES.forEach(function (title) {
+      var row = document.createElement("li");
+      row.className = "sidebar__chat-row";
+
+      var pick = document.createElement("button");
+      pick.type = "button";
+      pick.className = "sidebar__chat-pick";
+      pick.textContent = title;
+
+      var more = document.createElement("button");
+      more.type = "button";
+      more.className = "sidebar__chat-more";
+      more.setAttribute("aria-label", "Chat options");
+      more.innerHTML = dotsSvg;
+
+      more.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+
+      pick.addEventListener("click", function () {
+        inputEmpty.value = title;
+        inputDock.value = title;
+        sendUserMessage(title);
+      });
+
+      row.appendChild(pick);
+      row.appendChild(more);
+      sidebarChatsList.appendChild(row);
+    });
   }
 
   function onNewChat() {
@@ -291,5 +349,6 @@
   btnNewChat.addEventListener("click", onNewChat);
   btnToggle.addEventListener("click", onSidebarToggle);
 
+  renderSidebarChats();
   inputEmpty.focus();
 })();

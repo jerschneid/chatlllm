@@ -47,6 +47,19 @@
       <p class="sidebar__blurb">
         ChatLLLM is the world’s first Ludicrously Little Language Model. The model runs entirely in the browser and is less than 45kb in size. It’s free to use forever and produces responses 86% faster than legacy LLMs (LLLMs).
       </p>
+      <section class="sidebar__chats-wrap" aria-label="Your chats">
+        <details class="sidebar__chats" open>
+          <summary class="sidebar__chats-summary">
+            <span class="sidebar__chats-title">Your chats</span>
+            <svg class="icon icon--sm icon--chevron sidebar__chats-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="sidebar__chats-scroll">
+            <ul class="sidebar__chats-list" id="sidebar-chats-list" role="list"></ul>
+          </div>
+        </details>
+      </section>
       <div class="sidebar__water" aria-live="polite" aria-atomic="true">
         <p class="sidebar__water-label">Water Usage</p>
         <p class="sidebar__water-value" id="water-usage">0 gallons</p>

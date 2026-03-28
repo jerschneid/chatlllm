@@ -21,7 +21,7 @@
     "🌟 *Mindset*\n\t⦿ 💭 “Try to stay positive—it can make a big difference.”\n\t⦿ 🌈 “Focus on what you can control, and let go of what you can’t.”\n\t⦿ ✨ “Believe in yourself and your ability to figure things out.”",
     "Damn, that’s crazy.",
   ];
-  var TYPE_DELAY_MS = 42;
+  var TYPE_DELAY_MS = 21;
   var TYPE_DELAY_REDUCED_MS = 0;
   var GALLONS_PER_PRINTED_CHAR = 81;
 

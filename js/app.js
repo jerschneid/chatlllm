@@ -85,6 +85,9 @@
   var sidebarChatsList = document.getElementById("sidebar-chats-list");
   var sidebarShortcutsList = document.getElementById("sidebar-shortcuts-list");
 
+  /** Matches @media (max-width: 640px) in css/styles.css (mobile sidebar overlay). */
+  var MOBILE_SIDEBAR_MQ = window.matchMedia("(max-width: 640px)");
+
   var typingTimer = null;
   var isTyping = false;
   var remainingAssistantReplies = [];
@@ -353,6 +356,7 @@
     inputEmpty.value = text;
     inputDock.value = text;
     sendUserMessage(text);
+    collapseSidebarIfMobile();
   }
 
   function submitMessage(ev) {
@@ -432,12 +436,35 @@
   function onNewChat() {
     clearTyping();
     showEmptyLayout();
+    collapseSidebarIfMobile();
+  }
+
+  function setSidebarCollapsed(collapsed) {
+    sidebar.classList.toggle("collapsed", collapsed);
+    btnToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    btnToggle.setAttribute("aria-label", collapsed ? "Open sidebar" : "Close sidebar");
+  }
+
+  function isMobileSidebarView() {
+    return MOBILE_SIDEBAR_MQ.matches;
+  }
+
+  function collapseSidebarIfMobile() {
+    if (isMobileSidebarView() && !sidebar.classList.contains("collapsed")) {
+      setSidebarCollapsed(true);
+    }
   }
 
   function onSidebarToggle() {
-    var collapsed = sidebar.classList.toggle("collapsed");
-    btnToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
-    btnToggle.setAttribute("aria-label", collapsed ? "Open sidebar" : "Close sidebar");
+    setSidebarCollapsed(!sidebar.classList.contains("collapsed"));
+  }
+
+  function onMobileSidebarLayoutChange() {
+    if (MOBILE_SIDEBAR_MQ.matches) {
+      setSidebarCollapsed(true);
+    } else {
+      setSidebarCollapsed(false);
+    }
   }
 
   function bindComposer(form) {
@@ -460,6 +487,14 @@
 
   btnNewChat.addEventListener("click", onNewChat);
   btnToggle.addEventListener("click", onSidebarToggle);
+
+  if (typeof MOBILE_SIDEBAR_MQ.addEventListener === "function") {
+    MOBILE_SIDEBAR_MQ.addEventListener("change", onMobileSidebarLayoutChange);
+  } else if (typeof MOBILE_SIDEBAR_MQ.addListener === "function") {
+    MOBILE_SIDEBAR_MQ.addListener(onMobileSidebarLayoutChange);
+  }
+
+  onMobileSidebarLayoutChange();
 
   renderSidebarShortcuts();
   renderSidebarChats();

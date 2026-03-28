@@ -60,11 +60,6 @@
         '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 18h18" stroke-linecap="round"/><path d="M6 18l4-10 3 1.5L18 6l3 3-5 6.5L11 14l-2 4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     },
     {
-      label: "Codex",
-      icon:
-        '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>',
-    },
-    {
       label: "Projects",
       icon:
         '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 8h5l2 2h9v10H4V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 14v4M15 16h4" stroke-linecap="round"/></svg>',
@@ -368,13 +363,6 @@
   function renderSidebarChats() {
     if (!sidebarChatsList) return;
 
-    var dotsSvg =
-      '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
-      '<circle cx="5" cy="12" r="2"/>' +
-      '<circle cx="12" cy="12" r="2"/>' +
-      '<circle cx="19" cy="12" r="2"/>' +
-      "</svg>";
-
     CHAT_HISTORY_TITLES.forEach(function (title) {
       var row = document.createElement("li");
       row.className = "sidebar__chat-row";
@@ -384,22 +372,11 @@
       pick.className = "sidebar__chat-pick";
       pick.textContent = title;
 
-      var more = document.createElement("button");
-      more.type = "button";
-      more.className = "sidebar__chat-more";
-      more.setAttribute("aria-label", "Chat options");
-      more.innerHTML = dotsSvg;
-
-      more.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-
       pick.addEventListener("click", function () {
         fillAndSendPreset(title);
       });
 
       row.appendChild(pick);
-      row.appendChild(more);
       sidebarChatsList.appendChild(row);
     });
   }

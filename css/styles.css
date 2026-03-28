@@ -283,7 +283,7 @@ body {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 0px;
   margin-bottom: 12px;
 }
 
@@ -348,7 +348,6 @@ body {
 }
 
 .sidebar__chat-row {
-  position: relative;
   display: flex;
   align-items: stretch;
   gap: 0;
@@ -369,7 +368,7 @@ body {
   flex: 1;
   min-width: 0;
   margin: 0;
-  padding: 8px 36px 8px 10px;
+  padding: 8px 10px;
   border: none;
   border-radius: 8px;
   background: transparent;
@@ -392,43 +391,6 @@ body {
   outline: 2px solid #0d0d0d;
   outline-offset: 0;
   z-index: 1;
-}
-
-.sidebar__chat-more {
-  position: absolute;
-  top: 50%;
-  right: 4px;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.12s ease, background 0.12s ease;
-}
-
-.sidebar__chat-row:hover .sidebar__chat-more,
-.sidebar__chat-row:focus-within .sidebar__chat-more {
-  opacity: 1;
-}
-
-.sidebar__chat-more:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: var(--text);
-}
-
-.sidebar__chat-more:focus-visible {
-  opacity: 1;
-  outline: 2px solid #0d0d0d;
-  outline-offset: 0;
 }
 
 .sidebar__water {

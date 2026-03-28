@@ -23,6 +23,7 @@
   ];
   var TYPE_DELAY_MS = 42;
   var TYPE_DELAY_REDUCED_MS = 0;
+  var GALLONS_PER_PRINTED_CHAR = 81;
 
   var sidebar = document.getElementById("sidebar");
   var btnToggle = document.getElementById("btn-sidebar-toggle");
@@ -34,10 +35,12 @@
   var composerDock = document.getElementById("composer-dock");
   var inputEmpty = document.getElementById("input-empty");
   var inputDock = document.getElementById("input-dock");
+  var waterUsageEl = document.getElementById("water-usage");
 
   var typingTimer = null;
   var isTyping = false;
   var remainingAssistantReplies = [];
+  var totalWaterUsageGallons = 0;
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -54,6 +57,12 @@
     }
     isTyping = false;
     setComposersDisabled(false);
+  }
+
+  function updateWaterUsage(printedChars) {
+    if (!waterUsageEl || printedChars <= 0) return;
+    totalWaterUsageGallons += printedChars * GALLONS_PER_PRINTED_CHAR;
+    waterUsageEl.textContent = Math.round(totalWaterUsageGallons).toLocaleString() + " gallons";
   }
 
   function shuffledReplies() {
@@ -189,10 +198,12 @@
     }
 
     renderAssistantReply(bubble, parts, index + 1);
+    updateWaterUsage(1);
     scrollMessagesToEnd();
     var delay = charDelay();
     if (delay <= 0) {
       renderAssistantReply(bubble, parts, visibleLength);
+      updateWaterUsage(visibleLength - (index + 1));
       clearTyping();
       inputDock.focus();
       return;

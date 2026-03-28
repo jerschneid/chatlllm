@@ -202,6 +202,34 @@ body {
   display: none;
 }
 
+.sidebar__water {
+  margin-top: auto;
+  padding: 12px;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.sidebar__water-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sidebar__water-value {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sidebar.collapsed .sidebar__water {
+  display: none;
+}
+
 /* Main */
 
 .main {

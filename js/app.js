@@ -24,6 +24,8 @@
   var TYPE_DELAY_MS = 42;
   var TYPE_DELAY_REDUCED_MS = 0;
   var GALLONS_PER_PRINTED_CHAR = 81;
+  var GALLONS_PER_IMAGE_SPINNER_SECOND = 123;
+  var IMAGE_SPINNER_UPDATE_INTERVAL_MS = 100;
 
   var sidebar = document.getElementById("sidebar");
   var btnToggle = document.getElementById("btn-sidebar-toggle");
@@ -63,6 +65,45 @@
     if (!waterUsageEl || printedChars <= 0) return;
     totalWaterUsageGallons += printedChars * GALLONS_PER_PRINTED_CHAR;
     waterUsageEl.textContent = Math.round(totalWaterUsageGallons).toLocaleString() + " gallons";
+  }
+
+  var IMAGE_REQUEST_RE = /\b(generate|create|make|draw|design|paint|render|produce|illustrate|show me|give me)\b[\s\S]{0,60}\b(image|picture|photo|illustration|painting|artwork|drawing|graphic|portrait|sketch|wallpaper|logo)\b|\b(image|picture|photo|illustration|painting|artwork|drawing|graphic|portrait|sketch|wallpaper|logo)\b[\s\S]{0,60}\b(of|showing|with|featuring|that (shows?|depicts?))\b/i;
+
+  function isImageRequest(text) {
+    return IMAGE_REQUEST_RE.test(text);
+  }
+
+  function showImageGenerating(bubble) {
+    bubble.innerHTML =
+      '<div class="img-gen-wrap">' +
+        '<div class="img-gen-spinner" aria-hidden="true">' +
+          '<svg class="img-gen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">' +
+            '<rect x="3" y="5" width="18" height="14" rx="2"/>' +
+            '<circle cx="8.5" cy="10.5" r="1.5" fill="currentColor" stroke="none"/>' +
+            '<path d="m21 15-5-5L5 19" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg>' +
+        '</div>' +
+        '<p class="img-gen-label">Generating image…</p>' +
+      '</div>';
+    scrollMessagesToEnd();
+
+    var delay = 6000 + Math.floor(Math.random() * 3000);
+    var waterInterval = setInterval(function () {
+      updateWaterUsage(Math.ceil((GALLONS_PER_IMAGE_SPINNER_SECOND * IMAGE_SPINNER_UPDATE_INTERVAL_MS) / 1000));
+    }, IMAGE_SPINNER_UPDATE_INTERVAL_MS);
+    typingTimer = setTimeout(function () {
+      clearInterval(waterInterval);
+      typingTimer = null;
+      bubble.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = 'img/dog-i-have-noidea-what-im-doing.jpeg';
+      img.alt = 'Generated image';
+      img.className = 'msg-generated-image';
+      img.onload = scrollMessagesToEnd;
+      bubble.appendChild(img);
+      clearTyping();
+      inputDock.focus();
+    }, delay);
   }
 
   function shuffledReplies() {
@@ -255,8 +296,12 @@
     setComposersDisabled(true);
 
     var bubble = appendAssistantShell();
-    var replyParts = parseAssistantReply(getAssistantReply());
-    typeAssistantReply(bubble, replyParts, 0, assistantReplyLength(replyParts));
+    if (isImageRequest(text)) {
+      showImageGenerating(bubble);
+    } else {
+      var replyParts = parseAssistantReply(getAssistantReply());
+      typeAssistantReply(bubble, replyParts, 0, assistantReplyLength(replyParts));
+    }
   }
 
   function onNewChat() {

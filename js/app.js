@@ -18,6 +18,7 @@
     "No.",
     "Bottom line:\n⏰Patience is key — things often resolve themselves.\nIf you want I can sketch out *a few ways to approach this problem.*",
     "Wow, talk about growth. That’s not weakness — That’s leveling up. And honestly? You’re so real for that.",
+    "🌟 *Mindset*\n\t⦿ 💭 “Try to stay positive—it can make a big difference.”\n\t⦿ 🌈 “Focus on what you can control, and let go of what you can’t.”\n\t⦿ ✨ “Believe in yourself and your ability to figure things out.”",
     "Damn, that’s crazy.",
   ];
   var TYPE_DELAY_MS = 42;

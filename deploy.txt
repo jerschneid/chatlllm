@@ -1,0 +1,14 @@
+
+- Deployed on AWS Amplify.
+- I believe any commits to main of the repo will trigger a build and deploy.
+
+AWS Login info is in the Schnott Google drive... Jeremy has MFA, Dan should have an email about access
+
+Repo: 
+https://github.com/jerschneid/chatlllm
+
+Amplify Dashboard:
+https://us-east-1.console.aws.amazon.com/amplify/apps/di793fa5d9md4
+
+Amplify Deploy URL: 
+https://main.di793fa5d9md4.amplifyapp.com/

@@ -749,12 +749,12 @@ body {
   width: 100%;
 }
 
-/* Same footprint as the loaded image: max-width, radius, and aspect ratio of img/dog-i-have-noidea-what-im-doing.jpeg */
+/* Placeholder footprint: matches .msg-generated-image width; neutral ratio for mixed assets in img/gen/ */
 .img-gen-skeleton {
   position: relative;
   width: 100%;
   min-width: 380px;
-  aspect-ratio: 625 / 469;
+  aspect-ratio: 16 / 9;
   border-radius: 14px;
   box-sizing: border-box;
   background: linear-gradient(

@@ -123,8 +123,24 @@
 
   var IMAGE_REQUEST_RE = /\b(generate|create|make|draw|design|paint|render|produce|illustrate|show me|give me)\b[\s\S]{0,60}\b(image|picture|photo|illustration|painting|artwork|drawing|graphic|portrait|sketch|wallpaper|logo)\b|\b(image|picture|photo|illustration|painting|artwork|drawing|graphic|portrait|sketch|wallpaper|logo)\b[\s\S]{0,60}\b(of|showing|with|featuring|that (shows?|depicts?))\b/i;
 
+  var GEN_IMAGE_DIR = "img/gen/";
+  /** Filenames only — add new entries here (static site; no directory listing in the browser). */
+  var GEN_IMAGE_FILES = [
+    "ai.gif",
+    "dog-i-have-noidea-what-im-doing.jpeg",
+    "joey.gif",
+    "monkey-typing.gif",
+    "robot.gif",
+    "rube.gif",
+  ];
+
   function isImageRequest(text) {
     return IMAGE_REQUEST_RE.test(text);
+  }
+
+  function randomGenImageUrl() {
+    var name = GEN_IMAGE_FILES[Math.floor(Math.random() * GEN_IMAGE_FILES.length)];
+    return GEN_IMAGE_DIR + name;
   }
 
   function showImageGenerating(bubble) {
@@ -152,7 +168,7 @@
       typingTimer = null;
       bubble.innerHTML = '';
       var img = document.createElement('img');
-      img.src = 'img/dog-i-have-noidea-what-im-doing.jpeg';
+      img.src = randomGenImageUrl();
       img.alt = 'Generated image';
       img.className = 'msg-generated-image';
       img.onload = scrollMessagesToEnd;

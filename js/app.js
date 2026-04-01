@@ -1,3 +1,10 @@
+//////////////////////////////////
+// HEY THIS IS TOP SECRET STUFF
+// DON'T LOOK AT OUR SUPER SECRET LUDICROUSLY LITTLE LANGUAGE MODEL BELOW
+// AND IF YOU'RE WONDERING IF WE VIBE CODED THIS IN 30 MINUTES AS JOKE, THEN YES WE DID
+///////////////////////////////////
+
+
 (function () {
   "use strict";
 

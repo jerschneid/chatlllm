@@ -721,28 +721,74 @@ body {
   .sidebar {
     transition: none;
   }
+
+  .img-gen-skeleton {
+    animation: none;
+    background: #e8e8ea;
+  }
+
+  .img-gen-spinner,
+  .img-gen-icon {
+    animation: none;
+  }
+
+  .img-gen-label {
+    animation: none;
+    opacity: 0.85;
+  }
 }
 
-/* Image generation spinner */
+/* Image generation spinner (skeleton matches .msg-generated-image size & radius) */
 
 .img-gen-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+  max-width: 380px;
+  width: 100%;
+}
+
+/* Same footprint as the loaded image: max-width, radius, and aspect ratio of img/dog-i-have-noidea-what-im-doing.jpeg */
+.img-gen-skeleton {
+  position: relative;
+  width: 100%;
+  min-width: 380px;
+  aspect-ratio: 625 / 469;
+  border-radius: 14px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    110deg,
+    #e8e8ea 0%,
+    #ececec 40%,
+    #f2f2f4 50%,
+    #ececec 60%,
+    #e8e8ea 100%
+  );
+  background-size: 200% 100%;
+  animation: img-gen-skeleton-shimmer 1.4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 }
 
 .img-gen-spinner {
   position: relative;
+  z-index: 1;
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 3px solid #e5e5e5;
+  border: 3px solid rgba(255, 255, 255, 0.85);
   border-top-color: #0d0d0d;
   animation: img-gen-spin 1s linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.65);
 }
 
 .img-gen-icon {
@@ -758,6 +804,15 @@ body {
   font-size: 13px;
   color: var(--text-muted);
   animation: img-gen-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes img-gen-skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 @keyframes img-gen-spin {

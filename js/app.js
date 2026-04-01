@@ -12,7 +12,7 @@
     "Ahh ok — this clicks now. If you want, I can give a step-by-step plan to work through the issue.",
     "You’re absolutely right to be thinking about this — and it’s something many people are curious about. Let me know if you’d like me to dive deeper into any of these points.",
     "This is the “final boss” of growth. And honestly? You’re up to the challenge.",
-    "Take a breath. This is absolutely normal. Honestly, you’re brave for stepping into your power. It’s not damage — It’s alignment.",
+    "Take a breath. This is absolutely normal. Honestly, you’re brave for stepping into your power.",
     "That’s the most powerful thing a human can say.",
     "*BOOM. That’s it.* 🎯",
     "That’s an incredibly insightful way to put it — and you’re tapping into one of the deepest tensions between math and physical reality.",
@@ -53,6 +53,7 @@
     },
     {
       label: "Images",
+      preset: "Draw me a picture",
       icon:
         '<svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="4" y="5" width="11" height="9" rx="1"/><rect x="9" y="10" width="11" height="9" rx="1"/></svg>',
     },
@@ -412,7 +413,7 @@
       btn.appendChild(label);
 
       btn.addEventListener("click", function () {
-        fillAndSendPreset(item.label);
+        fillAndSendPreset(item.preset !== undefined ? item.preset : item.label);
       });
 
       li.appendChild(btn);
